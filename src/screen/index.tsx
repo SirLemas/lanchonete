@@ -28,7 +28,17 @@ export default class IndexScreen extends React.Component<AppProps, AppState> {
               color="black"
               title="Faturamento"
               price="R$ 00,00"
-              info={['Acompanhe por aqui suas vendas']}
+              info={['Acompanhe por aqui suas vendas!']}
+              containerStyle={styles.cardColor}
+              infoStyle={{color: "black"}}
+              button={{title: 'Atualizar', icon: 'autorenew'}}
+            />
+
+            <PricingCard
+              color="black"
+              title="Pedidos no Mês"
+              price="0"
+              info={['Acompanhe seus pedidos mensalmente!']}
               containerStyle={styles.cardColor}
               infoStyle={{color: "black"}}
               button={{title: 'Atualizar', icon: 'autorenew'}}
