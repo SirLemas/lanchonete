@@ -7,22 +7,30 @@ import { Fab } from '../../components/fab';
 
 export interface AppProps {
   navigation:any;
-  // onEditar(cardapio:Cardapio);
-  // onExcluir(id:string);
 }
 
 export interface AppState {
   cardapios:Cardapio[];
 }
 
+var itemsCardapio = [
+  new Cardapio('Passaporte de Carne', '8.5', '', '1'),
+  new Cardapio('Passaporte de Frango', '9.0', '', '2'),
+  new Cardapio('Passaporte de Carne de Sol','10.0', '', '3')
+];
+
 export default class CardapioScreen extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state={
-      cardapios: [new Cardapio('Passaporte de Carne', '8.5', '', '1'),
-                  new Cardapio('Passaporte de Frango', '9.0', '', '2'),
-                  new Cardapio('Passaporte de Carne de Sol','10.0', '', '3')]
+      cardapios: itemsCardapio
     }
+}
+
+updateData = itemCardapioAtualizado => {
+  console.log("Dado retornado para CardapioScreen: "+ itemCardapioAtualizado);
+
+  this.setState({ cardapios: [{...this.state.cardapios, itemCardapioAtualizado}]});
 }
 
   public render() {
@@ -36,12 +44,13 @@ export default class CardapioScreen extends React.Component<AppProps, AppState> 
               keyExtractor={(c) => c.id}
               renderItem={({item}) => (
                     <ItemCardapio cardapio={item} 
-                      onEditar={(cardapio) => this.props.navigation.navigate('updateCreate',{cardapio})} 
+                      // onEditar={(cardapio) => this.props.navigation.navigate('updateCreate',{cardapio})}
+                      onEditar={(cardapio) => this.props.navigation.navigate('updateCreate',{cardapio, updateData: this.updateData })} 
                       onExcluir={(id)=>console.log(id)} />
               )}
            />
          </ScrollView>
-         <Fab onPress={() => this.props.navigation.navigate('updateCreate')}/>
+         <Fab onPress={() => this.props.navigation.navigate('updateCreate', {cardapio: new Cardapio('', '', ''), updateData: this.updateData})}/>
       </View>
     );
   }
