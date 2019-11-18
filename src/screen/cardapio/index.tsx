@@ -10,7 +10,7 @@ export interface AppProps {
   navigation:any;
   cardapios: Cardapio[];
   onExcluir(id:number);
-  // onEditar(cardapio:Cardapio);
+
 }
 
 export interface AppState {
@@ -26,11 +26,6 @@ export default class CardapioScreen extends React.Component<AppProps, AppState> 
     this.state={
       cardapios: this.props.cardapios
     }
-    // this.state={
-    //   cardapios: [new Cardapio('Passaporte de Carne', '8.5', '', '1'),
-    //               new Cardapio('Passaporte de Frango', '9.0', '', '2'),
-    //               new Cardapio('Passaporte de Carne de Sol','10.0', '', '3')]
-    // }
 }
 
   componentDidMount(){

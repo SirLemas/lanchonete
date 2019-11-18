@@ -17,7 +17,8 @@ export default (props: AppProps) => (
                 inputContainerStyle={styles.containerInput} 
                 inputStyle={{color: 'black', marginRight: 5}} 
                 secureTextEntry={props.securityTextEntry} 
-                onChangeText={(texto) => props.onChangeText(texto)}/>
+                onChangeText={(texto) => props.onChangeText(texto)}
+                autoCapitalize = 'none' />
      </View>
 );
 

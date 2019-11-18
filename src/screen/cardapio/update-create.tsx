@@ -8,7 +8,6 @@ import { CardapioProviders } from '../../providers/cardapio';
 
 export interface AppProps {
     navigation:any;
-    // salvar(cardapio:Cardapio);
 }
 
 export interface AppState {
@@ -22,7 +21,7 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
   constructor(props: AppProps) {
     super(props);
     this.state = {
-        cardapio: this.props.navigation.getParam('cardapio', new Cardapio('', ''))
+        cardapio: this.props.navigation.getParam('cardapio', new Cardapio('', 0, ''))
     };
   }
 
@@ -47,7 +46,6 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
     //     this.props.navigation.navigate('cardapio', this.state.cardapio);
     //   }
   }
-
   public render() {
     const titulo = (this.state.cardapio == null ? 'Cadastrar ' : 'Editar ') + "Cardápio"; 
     return (
@@ -58,7 +56,7 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
         <Text style={{marginTop:250}}>Nome</Text>
         <Input placeholder="Digite o nome do item" value={this.state.cardapio.nome} onChangeText={(nome) => this.setState({cardapio: {...this.state.cardapio, nome}})}/>
         <Text>Preço</Text>
-        <Input placeholder="Digite o preço do item" value={this.state.cardapio.preco} onChangeText={(preco) => this.setState({cardapio: {...this.state.cardapio, preco}})}/>
+        <Input placeholder="Digite o preço do item" keyboardType='numeric' value={this.state.cardapio.preco} onChangeText={(preco) => this.setState({cardapio: {...this.state.cardapio, preco}})}/>
         <Text>Descrição</Text>
         <Input placeholder="Digite uma descrição" value={this.state.cardapio.descricao} onChangeText={(descricao) => this.setState({cardapio: {...this.state.cardapio, descricao}})}></Input>
         <Button buttonStyle={{marginTop: 10}} title="Salvar" onPress={this.salvar.bind(this)} />
