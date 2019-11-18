@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, FlatList, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, FlatList, ScrollView, Alert } from 'react-native';
 import Cardapio from '../../models/cardapio';
 import { Toolbar } from '../../components/toolbar';
 import { ItemCardapio } from '../../components/item-cardapio';
 import { Fab } from '../../components/fab';
+import { CardapioProviders } from '../../providers/cardapio';
 
 export interface AppProps {
   navigation:any;
+  cardapios: Cardapio[];
+  onExcluir(id:number);
   // onEditar(cardapio:Cardapio);
-  // onExcluir(id:string);
 }
 
 export interface AppState {
@@ -16,19 +18,44 @@ export interface AppState {
 }
 
 export default class CardapioScreen extends React.Component<AppProps, AppState> {
+
+  private CardapioProvider = new CardapioProviders();
+
   constructor(props: AppProps) {
     super(props);
     this.state={
-      cardapios: [new Cardapio('Passaporte de Carne', '8.5', '', '1'),
-                  new Cardapio('Passaporte de Frango', '9.0', '', '2'),
-                  new Cardapio('Passaporte de Carne de Sol','10.0', '', '3')]
+      cardapios: this.props.cardapios
     }
+    // this.state={
+    //   cardapios: [new Cardapio('Passaporte de Carne', '8.5', '', '1'),
+    //               new Cardapio('Passaporte de Frango', '9.0', '', '2'),
+    //               new Cardapio('Passaporte de Carne de Sol','10.0', '', '3')]
+    // }
 }
+
+  componentDidMount(){
+    this.props.navigation.addListener('didFocus', () => {
+      this.CardapioProvider.listar()
+        .then(cardapios => this.setState({cardapios}));
+    })
+  }
+
+  public excluir(id){
+    Alert.alert('Excluir item', 'Deseja mesmo excluir esse item do cardapio?', [
+      {text: 'Sim', onPress:() => {
+        console.log(id);
+        this.CardapioProvider.excluir(id);
+        this.CardapioProvider.listar()
+                              .then(cardapios => this.setState({cardapios}));
+      }},
+      {text: 'Não'}
+    ]);
+  }
 
   public render() {
     return (
       <View style={styles.background}>
-         <Toolbar titulo="Lista de Produtos" navigation={this.props.navigation} menu={true}/>
+         <Toolbar titulo="Items do Cardápio" navigation={this.props.navigation} menu={true}/>
          <ScrollView>
            <FlatList 
               data={this.state.cardapios}
@@ -37,7 +64,7 @@ export default class CardapioScreen extends React.Component<AppProps, AppState> 
               renderItem={({item}) => (
                     <ItemCardapio cardapio={item} 
                       onEditar={(cardapio) => this.props.navigation.navigate('updateCreate',{cardapio})} 
-                      onExcluir={(id)=>console.log(id)} />
+                      onExcluir={this.excluir.bind(this)}/>
               )}
            />
          </ScrollView>

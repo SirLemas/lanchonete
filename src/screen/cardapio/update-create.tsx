@@ -4,6 +4,7 @@ import { Button, Input } from 'react-native-elements';
 import Cardapio from '../../models/cardapio';
 import { Toolbar } from '../../components/toolbar';
 import cardapio from '../../navigation/cardapio';
+import { CardapioProviders } from '../../providers/cardapio';
 
 export interface AppProps {
     navigation:any;
@@ -15,6 +16,9 @@ export interface AppState {
 }
 
 export default class UpdateCreateScreen extends React.Component<AppProps, AppState> {
+
+  private cardapioProvider = new CardapioProviders();
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
@@ -23,14 +27,25 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
   }
 
   salvar(){
-    console.log(this.state.cardapio);
-      if(!this.state.cardapio.id){
-        let {cardapio} = this.state;
-        cardapio.id = Math.floor(Math.random() * 100).toString();
-        this.props.navigation.navigate('cardapio', {cardapio});
-      }else{
-        this.props.navigation.navigate('cardapio', this.state.cardapio);
-      }
+
+    let {cardapio} = this.state;
+    console.log(cardapio);
+    if(!this.state.cardapio.id){
+      this.cardapioProvider.cadastrar(cardapio);
+    }else{
+      this.cardapioProvider.atualizar(cardapio);
+    }
+
+    this.props.navigation.navigate('cardapio');
+
+    // console.log(this.state.cardapio);
+    //   if(!this.state.cardapio.id){
+    //     let {cardapio} = this.state;
+    //     cardapio.id = Math.floor(Math.random() * 100).toString();
+    //     this.props.navigation.navigate('cardapio', {cardapio});
+    //   }else{
+    //     this.props.navigation.navigate('cardapio', this.state.cardapio);
+    //   }
   }
 
   public render() {

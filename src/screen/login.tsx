@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ToastAndroid } from 'react-native';
 import { Button} from 'react-native-elements';
 import Input from '../components/input';
+import { UsuariosProviders } from '../providers/usuarios';
 
 export interface AppProps {
   navigation:any;
@@ -13,6 +14,9 @@ export interface AppState {
 }
 
 export default class LoginScreen extends React.Component<AppProps, AppState> {
+
+  private usuario = new UsuariosProviders();
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
@@ -21,12 +25,21 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
     };
   }
 
-public logar() {
-    if(this.state.login == 'admin' && this.state.senha == 'admin'){
+public async logar() {
+    let resp = await this.usuario.logar(this.state.login, this.state.senha);
+    console.log(resp);
+    if(resp){
+      console.log(resp);
       this.props.navigation.navigate('index');
-    }else {
-      ToastAndroid.show('Email/Senha Incorreta', 3500);
+    }else{
+      ToastAndroid.show('Login/Senha incorreta', 3500);
     }
+
+    // if(this.state.login == 'admin' && this.state.senha == 'admin'){
+    //   this.props.navigation.navigate('index');
+    // }else {
+    //   ToastAndroid.show('Email/Senha Incorreta', 3500);
+    // }
 }
 
   public render() {
