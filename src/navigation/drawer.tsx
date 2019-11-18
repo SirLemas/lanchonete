@@ -7,6 +7,8 @@ import LoginScreen from '../screen/login';
 // import CardapioScreen from '../screen/cardapio/index';
 import CardapioNavigation from './cardapio';
 import ConfigScreen from '../screen/config';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { UsuariosProviders } from '../providers/usuarios';
 
 export default createDrawerNavigator({
     index: {
@@ -39,3 +41,21 @@ export default createDrawerNavigator({
         }
     },
 });
+// ,{
+//     contentComponent: (props) =>{
+//         <View style={{marginTop: 20}}>
+//             <DrawerItems {...props} />
+//             <TouchableOpacity onPress={() => {
+//                 console.log('clicou em sair');
+//                 let UsuariosProvider = new UsuariosProviders();
+//                 UsuariosProvider.deslogar();
+//                 props.navigation.navigate('login');
+//             }}>
+//                 <View style={{flexDirection:'row', marginLeft:15}}>
+//                     <Icon name="exit-to-app"/> 
+//                     <Text style={{marginLeft:30}}>Sair</Text>
+//                 </View>
+//             </TouchableOpacity>
+//         </View>
+//     }
+// });
