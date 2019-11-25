@@ -13,7 +13,7 @@ export function ItemCardapio (props: AppProps) {
 
   var swipeButtons = [
       {text:'Editar', backgroundColor:'#ff8247', color:'black', onPress:()=>props.onEditar(props.cardapio)},
-      {text:'Remover', backgroundColor:"#f5f5f5", color:'black', onPress:()=>props.onExcluir(props.cardapio.id)}
+      {text:'Excluir', backgroundColor:"#f5f5f5", color:'black', onPress:()=>props.onExcluir(props.cardapio.id)}
   ]
 
     return (

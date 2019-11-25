@@ -22,11 +22,9 @@ export class UsuariosProviders extends APIProviders {
      */
     public async logar(login, senha): Promise<boolean> {
         return this.api.post('/login', {login, senha}).then(res => {
-            console.log('entrou');
             AsyncStorage.setItem('token', res.data.jwt);
             return true;
         }).catch(erro => {
-            console.log('faltou');
             return false;
         });
     }

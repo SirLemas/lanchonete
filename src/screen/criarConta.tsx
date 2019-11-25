@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ToastAndroid, ImageBackground } from 'react-native';
 import Input from '../components/input';
 
 import {Button} from 'react-native-elements';
@@ -47,55 +47,55 @@ public async cadastrar(){
   }else{
     ToastAndroid.show('Não foi possível cadastrar o usuário', 3000);
   }
-    // if(this.state.email == 'admin@admin.com' && this.state.login == 'admin' && this.state.senha == '123456'){
-    //   this.props.navigation.navigate('home');
-    // }else {
-    //   console.log('falha');
-    // }
 }
 
   public render() {
     return (
-        <View style={styles.container}>
-          <Text style={styles.texto}>Crie sua conta preenchendo os campos abaixo!</Text>
-            <Input placeholder="  Digite seu nome" icone="person" onChangeText={(nome) => this.setState({usuario: {...this.state.usuario, nome}})} />
-            <Input placeholder="  Digite seu email" icone="email" onChangeText={(email) => this.setState({usuario: {...this.state.usuario, email}})}/>
-            <Input placeholder="  Digite seu login" icone="mood" onChangeText={(login) => this.setState({usuario: {...this.state.usuario, login}})}/>
-            <Input placeholder="  Digite sua senha" securityTextEntry={true} icone="lock" onChangeText={(senha) => this.setState({usuario: {...this.state.usuario, senha}})}/>
-            {/* <Input placeholder="  Digite seu nome" icone="person" onChangeText={(nome) => this.setState({nome})} />
-            <Input placeholder="  Digite seu email" icone="email" onChangeText={(email) => this.setState({email})}/>
-            <Input placeholder="  Digite seu login" icone="mood" onChangeText={(login) => this.setState({login})}/>
-            <Input placeholder="  Digite sua senha" securityTextEntry={true} icone="lock" onChangeText={(senha) => this.setState({senha})}/> */}
-            <Button title="Criar Conta" buttonStyle={{borderRadius: 30, marginTop: 20}} onPress={this.cadastrar}/>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('login')}>
-                <Text style={styles.login}>Já possuo uma conta</Text>
-            </TouchableOpacity>
-        </View>
+      <ImageBackground source={require('./../../assets/imgs/login.jpg')} style={styles.bg_img}>
+          <View style={styles.container}>
+            <Text style={styles.texto}>Crie sua conta</Text>
+
+              <Input placeholder="  Digite seu nome" icone="person" onChangeText={(nome) => this.setState({usuario: {...this.state.usuario, nome}})} />
+              <Input placeholder="  Digite seu email" icone="email" onChangeText={(email) => this.setState({usuario: {...this.state.usuario, email}})}/>
+              <Input placeholder="  Digite seu login" icone="mood" onChangeText={(login) => this.setState({usuario: {...this.state.usuario, login}})}/>
+              <Input placeholder="  Digite sua senha" securityTextEntry={true} icone="lock" onChangeText={(senha) => this.setState({usuario: {...this.state.usuario, senha}})}/>
+
+              <Button title="Criar Conta" buttonStyle={{borderRadius: 30, marginTop: 20}} onPress={this.cadastrar}/>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('login')}>
+                  <Text style={styles.login}>Já possuo uma conta</Text>
+              </TouchableOpacity>
+          </View>
+        </ImageBackground>
     );
   }
 }
 
 const styles  = StyleSheet.create({
-    container: {
+  bg_img: {
+    width: '100%',
+    height: '100%'
+  },  
+  container: {
         flex:1,
         padding: 10,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'stretch',
-        backgroundColor: "#ff8c00"
+        alignItems: 'stretch'
     },
     texto: {
         color: 'black',
         fontSize: 25,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingBottom: 20
+        // paddingBottom: 20,
+        marginTop:30,
+        marginEnd:30
       },
       login: {
         color: 'black',
         fontSize: 20,
         textDecorationLine: 'underline',
-        margin: 20,
+        margin: 25,
         textAlign: 'center'
-      },
+      }
 });

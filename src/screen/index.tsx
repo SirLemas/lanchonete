@@ -1,48 +1,60 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import {Button, PricingCard} from 'react-native-elements';
+import {Button, PricingCard, Card, Icon} from 'react-native-elements';
 import { Toolbar } from '../components/toolbar';
+import { CardapioProviders } from '../providers/cardapio';
+import Cardapio from '../models/cardapio';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface AppProps {
   navigation:any;
+  cardapios: Cardapio[];
 }
 
 export interface AppState {
+  cardapios: Cardapio[];
+  valorTotal: '';
 }
 
 export default class IndexScreen extends React.Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-    this.state = {
-    };
+    private CardapioProvider = new CardapioProviders();
+
+    constructor(props: AppProps) {
+      super(props);
+      this.state={
+        cardapios: this.props.cardapios,
+        valorTotal: ''
+      }
+  }
+
+  componentDidMount(){
+    this.props.navigation.addListener('didFocus', () => {
+      this.CardapioProvider.listar()
+        .then(cardapios => this.setState({cardapios}));
+    })
+  }
+
+  contar(){
+    let total = Object.keys(this.state.cardapios).length;
+    let valor = total.toString();
+    this.setState({valorTotal:valor});
   }
 
   public render() {
     return (
         <View style={styles.container}>
             <Toolbar titulo="Inicio" navigation={this.props.navigation} menu/>
-            <Text style={styles.textoInit}>Bem vindo ao Seu Restaurante Virtual.</Text>
-            <Text style={styles.texto}>Para começar a mexer no app, acesse o menu ao lado esquerdo e veja o que você pode fazer para melhor atender seus clientes</Text>
-
-            <PricingCard
-              color="black"
-              title="Faturamento"
-              price="R$ 00,00"
-              info={['Acompanhe por aqui suas vendas!']}
-              containerStyle={styles.cardColor}
-              infoStyle={{color: "black"}}
-              button={{title: 'Atualizar', icon: 'autorenew'}}
-            />
-
-            <PricingCard
-              color="black"
-              title="Pedidos no Mês"
-              price="0"
-              info={['Acompanhe seus pedidos mensalmente!']}
-              containerStyle={styles.cardColor}
-              infoStyle={{color: "black"}}
-              button={{title: 'Atualizar', icon: 'autorenew'}}
-            />
+            <TouchableOpacity  onPress={() => this.contar()}>
+              <PricingCard
+                color="#20b2aa"
+                title="Items no Cardápio"
+                price={`${this.state.valorTotal}`}
+                info={['Acompanhe por aqui a quantidade de items disponiveis no cardápio']}
+                containerStyle={styles.cardColor}
+                infoStyle={{color: "#20b2aa"}}
+                button={{title: 'Atualizar', icon: 'autorenew'}}
+              />
+            </TouchableOpacity>
         </View>
     );
   }
@@ -51,14 +63,14 @@ export default class IndexScreen extends React.Component<AppProps, AppState> {
 const styles  = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: "#ff8c00"
+        backgroundColor: "#ffffff",
         // padding: 10,
         // flexDirection: 'column',
         // justifyContent: 'center',
         // alignItems: 'stretch'
     },
     cardColor:{
-      backgroundColor: "#ff8c00",
+      backgroundColor: "#0b0304",
     },
     textoInit: {
       justifyContent: "center",

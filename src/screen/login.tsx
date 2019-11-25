@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ToastAndroid } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ToastAndroid, ImageBackground } from 'react-native';
 import { Button} from 'react-native-elements';
 import Input from '../components/input';
 import { UsuariosProviders } from '../providers/usuarios';
@@ -26,46 +26,45 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
   }
 
 public async logar() {
+    
     let resp = await this.usuario.logar(this.state.login, this.state.senha);
-    console.log(resp);
+    
     if(resp){
-      console.log(resp);
       this.props.navigation.navigate('index');
     }else{
       ToastAndroid.show('Login/Senha incorreta', 3500);
     }
-
-    // if(this.state.login == 'admin' && this.state.senha == 'admin'){
-    //   this.props.navigation.navigate('index');
-    // }else {
-    //   ToastAndroid.show('Email/Senha Incorreta', 3500);
-    // }
 }
 
   public render() {
     return (
-      <View style={styles.container}>
-         <Text style={styles.textoInicial}>Bem vindo!</Text>
-         <Input placeholder="  Digite seu login" icone="mood" onChangeText={(login) => this.setState({login})}/>
-         <Input placeholder="  Digite sua senha" icone="lock" securityTextEntry onChangeText={(senha) => this.setState({senha})} />
-         <Button title="Logar" onPress={() => this.logar()} buttonStyle={{borderRadius:30, marginTop: 20}} />
-         <TouchableOpacity onPress={() => this.props.navigation.navigate('criar')}>
-            <Text style={styles.cadastro}>Não Possui Conta? Clique aqui e Cadastre-se!</Text>
-         </TouchableOpacity>
-      </View>
+      <ImageBackground source={require('./../../assets/imgs/login.jpg')} style={styles.bg_img}>
+        <View style={styles.container}>
+          <Text style={styles.textoInicial}>Bem Vindo!</Text>
+          <Input placeholder="  Digite seu login" icone="mood" onChangeText={(login) => this.setState({login})}/>
+          <Input placeholder="  Digite sua senha" icone="lock" securityTextEntry onChangeText={(senha) => this.setState({senha})} />
+          <Button title="Logar" onPress={() => this.logar()} buttonStyle={{borderRadius:30, marginTop: 20}} />
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('criar')}>
+              <Text style={styles.cadastro}>Não Possui Conta? Clique aqui e Cadastre-se!</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     );
   }
 }
 
 
 const styles  = StyleSheet.create({
+    bg_img: {
+      width: '100%',
+      height: '100%'
+    },
     container: {
         flex:1,
         padding: 10,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'stretch',
-        backgroundColor: "#ff8c00"
+        alignItems: 'stretch'
     },
     cadastro: {
         color: 'black',

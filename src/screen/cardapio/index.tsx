@@ -71,7 +71,7 @@ export default class CardapioScreen extends React.Component<AppProps, AppState> 
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "#ff8c00",
+    backgroundColor: "#ffffff",
     flex: 1
   }
 });

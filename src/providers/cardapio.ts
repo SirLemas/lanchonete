@@ -1,6 +1,5 @@
 import {APIProviders} from './api';
 import Cardapio from './../models/cardapio'
-import {AsyncStorage} from 'react-native';
 
 export class CardapioProviders extends APIProviders{
 
@@ -9,7 +8,7 @@ export class CardapioProviders extends APIProviders{
      */
     async listar(): Promise<Cardapio[]> {
         await this.getToken();
-        let res = await this.api.get('/cardapio');
+        let res = await this.api.get("/cardapio");
         return res.data;
     }
 
@@ -19,7 +18,7 @@ export class CardapioProviders extends APIProviders{
      */
     async buscar(id:number): Promise<Cardapio>{
         await this.getToken();
-        let res = await this.api.get('/cardapio'+id);
+        let res = await this.api.get("/cardapio"+id);
         return res.data;
     }
     
@@ -27,21 +26,21 @@ export class CardapioProviders extends APIProviders{
      * Cadastra um cardápio
      * @param cardapio 
      */
-    async cadastrar(cardapio: Cardapio){
-        console.log(cardapio);
+    async cadastrar(cardapio: Cardapio) {
+        console.log({cardapio});
         await this.getToken();
-        this.api.post('/cardapio', {cardapio:}).catch(error => {
-            console.log(error.response.data);
-        })
+        this.api.post("/cardapio", {cardapio}).catch(erro => {
+            console.log(erro.response.data)
+        });
     }
 
     /**
      * Atualiza/Edita um cardápio existente
      * @param cardapio 
      */
-    async atualizar(cardapio: Cardapio){
+    async atualizar(cardapio:Cardapio){
         await this.getToken();
-        this.api.put('/cardapio/'+cardapio.id, {cardapio})
+        this.api.put("/cardapio/"+cardapio.id, {cardapio});
     }
 
     /**
@@ -50,6 +49,6 @@ export class CardapioProviders extends APIProviders{
      */
     async excluir(id:number){
         await this.getToken();
-        this.api.delete('/cardapio/'+id)
+        this.api.delete("/cardapio/"+id);
     }
 }
