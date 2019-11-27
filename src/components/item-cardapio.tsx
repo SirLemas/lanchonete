@@ -19,9 +19,11 @@ export function ItemCardapio (props: AppProps) {
     return (
       <Swipeout right={swipeButtons}>
         <View style={styles.container}>
-          <Text style={styles.colorText}>Item: {props.cardapio.nome}</Text>
-          <Text style={styles.colorText}>Valor: R$ {props.cardapio.preco}</Text>
-          <Text style={styles.colorText}>Descrição: {props.cardapio.descricao}</Text>
+          <View style={styles.card}>
+            <Text style={styles.colorText}>Item: {props.cardapio.nome}</Text>
+            <Text style={styles.priceText}>R$ {props.cardapio.preco}</Text>
+            <Text style={styles.descriptionText}>Descrição: {props.cardapio.descricao}</Text>
+          </View>
         </View>
       </Swipeout>
     );
@@ -31,12 +33,42 @@ const styles = StyleSheet.create({
    container: {
        flexDirection: 'column',
        justifyContent:'center',
-       backgroundColor:'#ffa940',
+       backgroundColor:'#ffffff',
        padding:10,
+
+   },
+   card: {
+      backgroundColor: '#0b0304',
+      shadowColor: '#000',
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+      shadowOffset: {
+        width: 3,
+        height:3
+      }
+
    },
    colorText: {
-     color: 'black',
-     fontSize: 17,
+     color: '#20b2aa',
+     fontSize: 18,
+     fontWeight: "normal"
+   },
+   priceText: {
+     color: '#20b2aa',
+     fontSize: 20,
      fontWeight: "bold"
+   },
+   descriptionText: {
+    color: '#20b2aa',
+    fontSize: 14,
+    fontWeight: "normal"
    }
 });
+
+{/* <Swipeout right={swipeButtons}>
+        <View style={styles.container}>
+          <Text style={styles.colorText}>Item: {props.cardapio.nome}</Text>
+          <Text style={styles.colorText}>Valor: R$ {props.cardapio.preco}</Text>
+          <Text style={styles.colorText}>Descrição: {props.cardapio.descricao}</Text>
+        </View>
+</Swipeout> */}

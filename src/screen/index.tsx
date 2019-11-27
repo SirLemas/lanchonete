@@ -5,6 +5,7 @@ import { Toolbar } from '../components/toolbar';
 import { CardapioProviders } from '../providers/cardapio';
 import Cardapio from '../models/cardapio';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {AdMobBanner} from 'expo-ads-admob';
 
 export interface AppProps {
   navigation:any;
@@ -55,6 +56,11 @@ export default class IndexScreen extends React.Component<AppProps, AppState> {
                 button={{title: 'Atualizar', icon: 'autorenew'}}
               />
             </TouchableOpacity>
+            <AdMobBanner
+            bannerSize = "mediumRectangle"
+            adUnitID = "ca-app-pub-8821499412972235/1650773617"
+            testDeviceID="EMULATOR"
+            />
         </View>
     );
   }

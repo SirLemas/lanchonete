@@ -40,7 +40,7 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
   public render() {
     const titulo = (this.state.cardapio == null ? 'Cadastrar ' : 'Editar ') + "Cardápio"; 
     return (
-    <ImageBackground source={require('./../../assets/imgs/login.jpg')} style={styles.bg_img}>
+    <ImageBackground source={require('./../../../assets/imgs/login.jpg')} style={styles.bg_img}>
       <View style={styles.container}>
           <Toolbar titulo={titulo} navigation={this.props.navigation} voltar />
           <Text style={styles.textoCadastro}>Preencha as informações abaixo</Text>
@@ -48,7 +48,6 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
             <Input placeholder="Digite o preço do item" keyboardType='numeric' value={`${this.state.cardapio.preco}`} onChangeText={(preco) => this.setState({cardapio: {...this.state.cardapio, preco}})}/>
             <Input placeholder="Digite uma descrição" value={this.state.cardapio.descricao} onChangeText={(descricao) => this.setState({cardapio: {...this.state.cardapio, descricao}})}></Input>
             <Button buttonStyle={{marginTop: 10}} title="Salvar" onPress={this.salvar.bind(this)} />
-          
       </View>
       </ImageBackground> 
     );
