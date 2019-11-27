@@ -19,11 +19,9 @@ export function ItemCardapio (props: AppProps) {
     return (
       <Swipeout right={swipeButtons}>
         <View style={styles.container}>
-          <View style={styles.card}>
             <Text style={styles.colorText}>Item: {props.cardapio.nome}</Text>
             <Text style={styles.priceText}>R$ {props.cardapio.preco}</Text>
             <Text style={styles.descriptionText}>Descrição: {props.cardapio.descricao}</Text>
-          </View>
         </View>
       </Swipeout>
     );
@@ -64,11 +62,3 @@ const styles = StyleSheet.create({
     fontWeight: "normal"
    }
 });
-
-{/* <Swipeout right={swipeButtons}>
-        <View style={styles.container}>
-          <Text style={styles.colorText}>Item: {props.cardapio.nome}</Text>
-          <Text style={styles.colorText}>Valor: R$ {props.cardapio.preco}</Text>
-          <Text style={styles.colorText}>Descrição: {props.cardapio.descricao}</Text>
-        </View>
-</Swipeout> */}

@@ -41,13 +41,13 @@ export default class UpdateCreateScreen extends React.Component<AppProps, AppSta
     const titulo = (this.state.cardapio == null ? 'Cadastrar ' : 'Editar ') + "Cardápio"; 
     return (
     <ImageBackground source={require('./../../../assets/imgs/login.jpg')} style={styles.bg_img}>
+      <Toolbar titulo={titulo} navigation={this.props.navigation} voltar />
       <View style={styles.container}>
-          <Toolbar titulo={titulo} navigation={this.props.navigation} voltar />
-          <Text style={styles.textoCadastro}>Preencha as informações abaixo</Text>
+          <Text style={styles.textoCadastro}>Dados do Item</Text>
             <Input placeholder="Digite o nome do item" value={this.state.cardapio.nome} onChangeText={(nome) => this.setState({cardapio: {...this.state.cardapio, nome}})}/>
             <Input placeholder="Digite o preço do item" keyboardType='numeric' value={`${this.state.cardapio.preco}`} onChangeText={(preco) => this.setState({cardapio: {...this.state.cardapio, preco}})}/>
             <Input placeholder="Digite uma descrição" value={this.state.cardapio.descricao} onChangeText={(descricao) => this.setState({cardapio: {...this.state.cardapio, descricao}})}></Input>
-            <Button buttonStyle={{marginTop: 10}} title="Salvar" onPress={this.salvar.bind(this)} />
+            <Button buttonStyle={{borderRadius:30, marginTop: 25}} title="Salvar" onPress={this.salvar.bind(this)} />
       </View>
       </ImageBackground> 
     );
@@ -61,13 +61,16 @@ const styles = StyleSheet.create({
   },
   textoCadastro: {
     color: 'black',
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     margin: 20,
     textAlign: 'center'
   },
     container: {
       flex:1,
+      paddingBottom: 80,
+      flexDirection: 'column',
+      justifyContent: 'center',
       alignItems: 'stretch'
     }
   });

@@ -53,6 +53,7 @@ export default class IndexScreen extends React.Component<AppProps, AppState> {
                 info={['Acompanhe por aqui a quantidade de items disponiveis no cardápio']}
                 containerStyle={styles.cardColor}
                 infoStyle={{color: "#20b2aa"}}
+                pricingStyle={{color: "#20b2aa"}}
                 button={{title: 'Atualizar', icon: 'autorenew'}}
               />
             </TouchableOpacity>
