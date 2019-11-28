@@ -1,5 +1,5 @@
 import React from 'react';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createDrawerNavigator, DrawerNavigatorItems} from 'react-navigation-drawer';
 import { Icon } from 'react-native-elements';
 
 import IndexScreen from '../screen';
@@ -9,6 +9,7 @@ import CardapioNavigation from './cardapio';
 import ConfigScreen from '../screen/config';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UsuariosProviders } from '../providers/usuarios';
+import { View, Text } from 'react-native';
 
 export default createDrawerNavigator({
     index: {
@@ -32,30 +33,28 @@ export default createDrawerNavigator({
             drawerIcon: <Icon name="settings"/>
         }
     },
-    login: {
-        screen: LoginScreen,
-        navigationOptions: {
-            title: 'Sair',
-            drawerLockMode: "locked-closed",
-            drawerIcon: <Icon name="exit-to-app"/>
-        }
-    },
-});
-// ,{
-//     contentComponent: (props) =>{
-//         <View style={{marginTop: 20}}>
-//             <DrawerItems {...props} />
-//             <TouchableOpacity onPress={() => {
-//                 console.log('clicou em sair');
-//                 let UsuariosProvider = new UsuariosProviders();
-//                 UsuariosProvider.deslogar();
-//                 props.navigation.navigate('login');
-//             }}>
-//                 <View style={{flexDirection:'row', marginLeft:15}}>
-//                     <Icon name="exit-to-app"/> 
-//                     <Text style={{marginLeft:30}}>Sair</Text>
-//                 </View>
-//             </TouchableOpacity>
-//         </View>
-//     }
-// });
+    // login: {
+    //     screen: LoginScreen,
+    //     navigationOptions: {
+    //         title: 'Sair',
+    //         drawerLockMode: "locked-closed",
+    //         drawerIcon: <Icon name="exit-to-app"/>
+    //     }
+    // },
+    },{
+        contentComponent: (props) => (
+            <View style={{marginTop:20}}>
+                <DrawerNavigatorItems {...props} />
+                <TouchableOpacity onPress={() => {
+                    let usuario = new UsuariosProviders();
+                    usuario.deslogar();
+                    props.navigation.navigate('login');
+                }}>
+                    <View style={{flexDirection:'row', marginLeft:15}}>
+                        <Icon name="exit-to-app"/> 
+                        <Text style={{marginLeft:30}}>Sair</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    });
